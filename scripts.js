@@ -1,9 +1,18 @@
-//Está função verifica se a caixa de texto não está vazia, em seguida
-//adiciona a tarefa descrita pelo usuário, com a opcao de deletar a
-//tarefa
-
 //IMPORTANTE!!! ---- adicionar o recebimento dos possiveis detalhes
 //inseridos
+
+var dateTask = document.createElement("input");
+dateTask.type = 'date'
+dateTask.id = 'dateTask';
+
+var description = document.createElement("input");
+description.type = 'text';
+description.id = 'description';
+description.placeholder = 'Descreva a sua tarefa aqui...';
+
+//Está função verifica se a caixa de texto não está vazia, em seguida
+//adiciona a tarefa descrita pelo usuário, com a opcao de deletar a
+// tarefa
 document.querySelector('#push').onclick = function() {
     if(document.querySelector('#newTask input').value.length == 0) {
         alert("Indique um nome para a tarefa!!")
@@ -35,39 +44,61 @@ document.querySelector('#push').onclick = function() {
 
 
 
-// Adiciona detalhes
-document.querySelector('#details').onclick = function() {
-    var btnLessDetails = document.createElement("button");
-    btnLessDetails.id = 'lessDetails';
+// define a div pai para a operação dos botoes
+    var divPai = document.getElementById('divDetails');
 
-    // definir conteudo do botao
-    var txtBtnLessDetails = document.createTextNode("Menos detalhes");
-    
-    // adicionar conteudo ao botao
-    btnLessDetails.appendChild(txtBtnLessDetails);
-    
-    // definir elemento que sera trocado
-    var replace = document.querySelector('#details');
+// botao "adicionar detalhes"
 
-    // selecionar elemento pai
-    var dad = replace.parentNode;
-
-    // trocar elementos
-    // elementoPai.replaceChild('novo_elemento', 'elemento_substituido')
-    dad.replaceChild(btnLessDetails, replace);
-}
+var btnDetails = document.createElement("button");
+btnDetails.id = 'btnDetails';
+btnDetails.textContent = "Adicionar detalhes";
+btnDetails.setAttribute('onclick', 'changeBtn()');
+btnDetails.setAttribute('name', 'btn');
 
 
-document.querySelector('#lessDetails').onclick = function() {
-    var btnDetails = document.createElement("button");
-    btnDetails.id = 'details';
+// Insere o botao "adicionar detalhes" na pagina
+divPai.appendChild(btnDetails);
 
-    var txtBtnDetails = document.createTextNode("Adicionar detalhes");
-    btnDetails.appendChild(txtBtnDetails);
 
-    var replace = document.querySelector('#lessDetails');
 
-    //var dad = replace.parentNode;
+//botao "menos detalhes"
 
-    dad.replaceChild(btnDetails, replace);
+var btnLessDetails = document.createElement("button");
+btnLessDetails.id = 'btnLessDetails';
+btnLessDetails.textContent = "Menos detalhes";
+btnLessDetails.setAttribute('onclick', 'changeBtn()');
+btnLessDetails.setAttribute('name', 'btn');
+
+//define variavel x, que altera seu valor entre 0 e 1 toda vez que 
+//o onclick do botao de detalhes é acionado
+var x = 1;
+
+
+
+function changeBtn() {
+
+    txtButton = (document.getElementsByName('btn')).textContent;
+
+    if (x == 1) {
+
+        btnDetails.remove();
+
+        divPai.appendChild(dateTask);
+        divPai.appendChild(description);
+
+        divPai.appendChild(btnLessDetails);
+
+        x = 0;
+
+    } else {
+
+        btnLessDetails.remove();
+        dateTask.remove();
+        description.remove();
+
+        divPai.appendChild(btnDetails);
+
+        x = 1;
+
+    }
 }

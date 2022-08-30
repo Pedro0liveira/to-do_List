@@ -1,0 +1,14 @@
+`
+            if (dateTask.value.length != 0) {
+                `<span id="date">
+                    ${document.querySelector('#dateTask input').value}
+                </span>
+                `
+            }
+            if (description.value.length != 0) {
+                `<span id="desc">
+                    ${document.querySelector('#description input').value}
+                </span>
+                `
+            }
+            `
